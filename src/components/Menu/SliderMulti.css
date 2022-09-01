@@ -1,0 +1,30 @@
+.swiper-slide {
+    
+    width: 250px !important;
+}
+
+.swiper {
+    width: 80%;
+    overflow: inherit !important;
+}
+
+.swiper-scrollbar-drag {
+    background: none !important;
+}
+.swiper-scrollbar {
+    background: none !important;
+}
+
+.swiper-button-next {
+    color: #27ae60 !important;
+}
+.swiper-button-prev {
+    color: #27ae60 !important;
+}
+
+.swiper-pagination-bullet-active{
+    background: #192a56 !important;
+}
+.swiper-horizontal>.swiper-pagination-bullets, .swiper-pagination-bullets.swiper-pagination-horizontal, .swiper-pagination-custom, .swiper-pagination-fraction {
+    bottom: -20px !important;
+}

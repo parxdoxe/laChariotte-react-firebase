@@ -1,0 +1,39 @@
+.carousel .thumbs {
+    display: none;
+}
+
+.carousel-root {
+    margin-top: 25px;
+}
+
+.carousel-status{
+    display: none;
+}
+
+.carousel .slide img {
+    width: 60%;  
+}
+
+.carousel-root{
+    position: relative;
+    margin: 0 50px 0 25px;
+}
+
+.carousel.carousel-slider .control-arrow:hover {
+    position: absolute;
+    background: transparent;
+}
+
+.carousel .control-prev.control-arrow:before {
+    position: absolute;
+    border-right: 8px solid #121212;
+}
+
+.carousel .control-next.control-arrow:before {
+    position: absolute;
+    border-left: 8px solid #121212;
+}
+
+.carousel .control-next.control-arrow {
+    right: 10px;
+}
