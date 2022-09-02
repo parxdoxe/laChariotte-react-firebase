@@ -1,12 +1,12 @@
-import { addDoc, collection, getDocs, doc, updateDoc, setDoc, increment } from "firebase/firestore";
+import { doc, updateDoc, setDoc, increment } from "firebase/firestore";
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useUserAuth } from "../../context/UserAuthContext";
-import { db, auth } from "../../firebase-config";
+import { db } from "../../firebase-config";
 import { AiOutlineHeart, AiFillHeart, AiFillCheckCircle } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 
-function Card({ burger, index }) {
+function Card({ product }) {
   const { admin } = useUserAuth();
   const [success, setSuccess] = useState(false);
   const [event, setEvent] = useState(true);
@@ -15,9 +15,9 @@ function Card({ burger, index }) {
 
   const addToCart = () => {
     if (admin) {
-      const test = doc(db, `cart-${admin.uid}`, `article-${burger.id}`);
+      const test = doc(db, `cart-${admin.uid}`, `article-${product.id}`);
 
-      setDoc(test, burger, { merge: true }).then(() => {
+      setDoc(test, product, { merge: true }).then(() => {
         setSuccess(true);
       });
 
@@ -43,16 +43,17 @@ function Card({ burger, index }) {
 
   return (
     <div className="flex flex-col items-center relative justify-end relative w-1/4 h-[250px] bg-[#fff] shadow-xl  rounded-xl mr-4 mb-20">
+      
       <img
         className="rounded-[100%] w-[150px] absolute z-1 top-[-20%] rigth-[25%]"
-        src={burger.images}
-        alt={burger.name}
+        src={product.images}
+        alt={product.name}
       />
       
         <>
           <div className="text-center my-5 px-4">
-            <h4 className="text-lg font-medium mb-2">{burger.name}</h4>
-            <p className="text-sm text-gray-400">{burger.description}</p>
+            <h4 className="text-lg font-medium mb-2">{product.name}</h4>
+            <p className="overflow text-sm text-gray-400">{product.description}</p>
           </div>
 
           {click ? (
@@ -64,7 +65,7 @@ function Card({ burger, index }) {
           )}
 
           <div className="flex justify-between w-[85%]">
-            <span className="font-bold">{burger.prix}€</span>
+            <span className="font-bold">{product.price}€</span>
             <span className="cursor-pointer" onClick={changHeart}>
               {event ? (
                 <AiOutlineHeart color="#EBD671" fontWeight="bold" />

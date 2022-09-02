@@ -42,13 +42,17 @@ function App() {
         </Route>
         <Route path="/">
           <Route index element={<Home />} />
-          <Route path="login" element={<ProtectedRUser> <Login /> </ProtectedRUser>} />
-          <Route path="signup" element={<ProtectedRUser><Signup /></ProtectedRUser>} />
-          <Route path="Account" element={<Account />} />
+          <Route path="login" element={ <Login /> } />
+          <Route path="signup" element={ <Signup /> } />
+          <Route path="Account" element={<ProtectedRUser><Account /></ProtectedRUser>} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="commande" element={<Cart />} />
-          <Route path="menu" element={<Menu />} />
+          <Route path="menu/tout" element={<Menu />} />
+          <Route path="menu/type-burgers" element={<Menu type={'burgers'} />} />
+          <Route path="menu/type-plats" element={<Menu type={'plats'} />} />
+          <Route path="menu/type-boissons" element={<Menu type={'boissons'} />} />
+          <Route path="menu/type-sauces" element={<Menu type={'sauces'} />} />
         </Route>
       </Routes>
     </>

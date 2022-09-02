@@ -1,9 +1,9 @@
 import React from "react";
-import axios from 'axios';
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../firebase-config";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useUserAuth } from "../../context/UserAuthContext";
 
 function FormSignup(props) {
@@ -15,10 +15,14 @@ function FormSignup(props) {
   const { signup, admin } = useUserAuth();
   const navigate = useNavigate();
 
-
-  const commune = ['Marconne',  'Verquin',  'Béthune',  'Anzin-Saint-Aubin', 'Arras', 'Locon']
-
-console.log(commune);
+  const commune = [
+    "Marconne",
+    "Verquin",
+    "Béthune",
+    "Anzin-Saint-Aubin",
+    "Arras",
+    "Locon",
+  ];
 
   const handleAdd = async (e) => {
     e.preventDefault();
@@ -34,12 +38,22 @@ console.log(commune);
         role: role,
         uid: res.user.uid,
       });
-      console.log(res.user.uid);
       navigate("/");
-    } catch {
-      setError(true);
+    } catch(err)   {
+      if (err.message == 'Firebase: Error (auth/invalid-email).') {
+        setError('L\'adresse email n\'est pas valide')
+      }
+      if (err.message == 'Firebase: Error (auth/email-already-in-use).') {
+        setError('L\'utilisateur existe déja.')
+      }
+      if (err.message == 'Firebase: Password should be at least 6 characters (auth/weak-password).') {
+        setError('Le mot de passe n\'est pas valide.')
+      }
+      console.log(err);
     }
   };
+
+ 
 
   return (
     <div className="flex items-center justify-center h-[80vh]">
@@ -92,10 +106,10 @@ console.log(commune);
               />
             </div>
           </div>
-          <select name="" id="">
+          <select name="city" id="city">
             <option disabled>Votre ville</option>
             {commune.map((c) => (
-            <option value={c}>{c}</option>
+              <option value={c}>{c}</option>
             ))}
           </select>
           <div className="form-group mb-6">
@@ -144,7 +158,7 @@ console.log(commune);
           </div>
           {error && (
             <span className="text-red-500 text-sm text-center">
-              L'utilisateur existe déja
+              {error}
             </span>
           )}
           <button

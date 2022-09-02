@@ -58,16 +58,16 @@ function Header({quantity}) {
       </div>
       <ul className="w-1/3 flex justify-between items-center">
         <li className="border-b border-[#F6F6F6] duration-75 hover:border-b-2 hover:border-[#27ae60]">
-          <NavLink to="/">Accueil</NavLink>
+          <NavLink className={({isActive}) => (isActive ? "border-b-2 border-[#27ae60]" : "")} to="/" >Accueil</NavLink>
         </li>
         <li className="border-b border-[#F6F6F6] duration-75 hover:border-b-2 hover:border-[#27ae60]">
-          <NavLink to="/menu">Menu</NavLink>
+          <NavLink className={({isActive}) => (isActive ? "border-b-2 border-[#27ae60]" : "")} to="/menu/tout">Menu</NavLink>
         </li>
         <li className="border-b border-[#F6F6F6] duration-75 hover:border-b-2 hover:border-[#27ae60]">
-          <a href="/#about">A propos</a>
+          <NavLink className={({isActive}) => (isActive ? "border-b-2 border-[#27ae60]" : "")} to="/about">A propos</NavLink>
         </li>
-        <li className="border-b border-[#F6F6F6] duration-75 hover:border-b-2 hover:border-[#27ae60]">
-          <a href="/#contact">Contact</a>
+        <li className="border-b border-[#F6F6F6] duration-75 hover: hover:border-[#27ae60]">
+          <NavLink className={({isActive}) => (isActive ? "border-b-2 border-[#27ae60]" : "")} to="/contact">Contact</NavLink>
         </li>
       </ul>
       {admin ? (

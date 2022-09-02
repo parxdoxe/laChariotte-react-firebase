@@ -1,14 +1,13 @@
 import React from "react";
-import Header from "../../components/Header/Header";
 import Results from "../../components/Details/Results";
-import HeaderMenu from "../../components/Header/HeaderMenu";
+import Header from "../../components/Header/Header";
 import FooterMenu from "../../components/Footer/FooterMenu";
 
-function Menu() {
+function Menu(props) {
   return (
     <>
-      <HeaderMenu />
-      <Results />
+      <Header />
+      <Results type={props.type} />
       <FooterMenu />
     </>
   );

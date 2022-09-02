@@ -1,14 +1,10 @@
 import React from "react";
 import Header from "../../components/Header/Header";
-import { useUserAuth } from "../../context/UserAuthContext";
 import {
   collection,
-  doc,
   getDocs,
   query,
   where,
-  updateDoc,
-  Firestore,
 } from "firebase/firestore";
 import { auth, db } from "../../firebase-config";
 import { useEffect } from "react";

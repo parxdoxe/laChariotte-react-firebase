@@ -99,22 +99,22 @@ function Footer(props) {
               Produits
             </h6>
             <p className="mb-4">
-              <a href="/menu" className="text-gray-600">
+              <a href="/menu/tout" className="text-gray-600">
                 Tout
               </a>
             </p>
             <p className="mb-4">
-              <a href="/menu" className="text-gray-600">
+              <a href="/menu/type-burgers" className="text-gray-600">
                 Burgers
               </a>
             </p>
             <p className="mb-4">
-              <a href="/menu" className="text-gray-600">
+              <a href="/menu/type-plats" className="text-gray-600">
                 Plats
               </a>
             </p>
             <p>
-              <a href="/menu" className="text-gray-600">
+              <a href="/menu/type-sauces" className="text-gray-600">
                 Sauces
               </a>
             </p>
@@ -124,12 +124,12 @@ function Footer(props) {
               Liens
             </h6>
             <p className="mb-4">
-              <a href="#" className="text-gray-600">
+              <a href="/" className="text-gray-600">
                 Accueil
               </a>
             </p>
             <p className="mb-4">
-              <a href="/menu" className="text-gray-600">
+              <a href="/menu/tout" className="text-gray-600">
                 Menu
               </a>
             </p>
