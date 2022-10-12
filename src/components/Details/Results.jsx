@@ -40,6 +40,7 @@ function Results(props) {
     }, 100);
   }
 
+  console.log(menus);
 
   return  (
     <>

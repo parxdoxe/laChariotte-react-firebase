@@ -5,7 +5,7 @@ import { useUserAuth } from "../context/UserAuthContext";
 function ProtectedRUser({children}) {
     const { admin } = useUserAuth();
 
-    if (admin) {
+    if (!admin) {
      return <Navigate to="/" />
     }
      return children;

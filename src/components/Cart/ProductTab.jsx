@@ -1,57 +1,59 @@
 import React from "react";
-import { collection, getDocs, deleteDoc, doc, updateDoc, increment } from "firebase/firestore";
-import { useState } from "react";
-import { useEffect } from "react";
-import { auth, db, fs } from "../../firebase-config";
+import {  deleteDoc, doc, updateDoc, increment } from "firebase/firestore";
+import { db} from "../../firebase-config";
 import { useUserAuth } from "../../context/UserAuthContext";
-import Header from "../../components/Header/Header";
+import { useState } from "react"
+
 
 function ProductTab({product}) {
     const { admin } = useUserAuth();
-
+    const [prodQuantity, setProdQuantity] = useState(product.quantity)
+    const [event, setEvent] = useState(true)
 
   
-  const incrementProduct = (index) => {
-    const test = doc(db, `cart-${admin.uid}`, `article-${index}`);
-    const updateIncrement = async () => {
-      await updateDoc(test, {
-        quantity: increment(+1),
-      });
-    };
-    updateIncrement()
-    setTimeout(() => {
-      window.location.reload() 
-    }, 400);
-  }
+  const decrementProduct =  (index, quantity) =>  {
 
-  const decrementProduct = (index, quantity) => {
     const test = doc(db, `cart-${admin.uid}`, `article-${index}`);
     if (quantity > 1) {
-      
+      setProdQuantity(prodQuantity - 1)
       const updateDecrement = async () => {
         await updateDoc(test, {
           quantity: increment(-1),
         });
       };
       updateDecrement()
-      setTimeout(() => {
-        window.location.reload() 
-      }, 400);
     }
   }
 
+  const incrementProduct = (index) => {
+
+    const test = doc(db, `cart-${admin.uid}`, `article-${index}`);
+    setProdQuantity(prodQuantity + 1)
+        const updateIncrement = async () => {
+          await updateDoc(test, {
+            quantity: increment(+1),
+          });
+        };
+        updateIncrement();
+
+  };
+
   const deleteProduct = (index) => {
-    console.log(index);
+    
+      setEvent(!event);
+    
       const remove = async () => {
         await deleteDoc(doc(db, `cart-${admin.uid}`, `article-${index}`));
       } 
-      remove()
-    setTimeout(() => {
-      window.location.reload() 
-    }, 1000);
+      remove() 
+      setTimeout(() => {
+            window.location.reload()
+      }, 400);
   }
+
+
     return (
-        <div className="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5">
+        <div className={ event ? "flex items-center hover:bg-gray-100 -mx-8 px-6 py-5" : "hidden"}>
         
           
         
@@ -74,9 +76,9 @@ function ProductTab({product}) {
             <svg onClick={()=>decrementProduct(product.id, product.quantity)} className="cursor-pointer fill-current text-gray-600 w-3" viewBox="0 0 448 512"><path d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"/>
             </svg>
 
-            <input className="mx-2 border text-center w-12" type="text" readOnly value={product.quantity} />
+            <input className="mx-2 border text-center w-12" type="text" readOnly value={prodQuantity} />
 
-            <svg onClick={()=>incrementProduct(product.id, product.quantity)}  className="cursor-pointer fill-current text-gray-600 w-3" viewBox="0 0 448 512">
+            <svg onClick={()=>incrementProduct(product.id)}  className="cursor-pointer fill-current text-gray-600 w-3" viewBox="0 0 448 512">
               <path d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"/>
             </svg>
           </div>

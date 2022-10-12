@@ -236,7 +236,7 @@ function Footer(props) {
         <span className="mr-2">© 2022 Copyright:</span>
         <a
           className="text-gray-600 font-semibold"
-          href="https://tailwind-elements.com/"
+          href=""
         >
           parxdoxe@Web
         </a>

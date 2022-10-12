@@ -30,8 +30,12 @@ function Card({ product }) {
       updateTest();
       setClick(!click);
       setTimeout(() => {
+        window.location.reload()
+      }, 400);
+      setTimeout(() => {
         setClick(false);
       }, 1000);
+      
     } else {
       navigate("/login");
     }

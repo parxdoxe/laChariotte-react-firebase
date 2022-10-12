@@ -5,18 +5,38 @@ import { db } from "../../firebase-config";
 import { useState } from "react";
 
 function FormContact(props) {
-  const [error, setError] = useState(false);
+  const [error, setError] = useState();
   const [email, setEmail] = useState();
   const [success, setSuccess] = useState();
   const [name, setName] = useState();
   const [lastName, setLastName] = useState();
   const [message, setMessage] = useState();
+  const [close, setClose] = useState(true);
   const navigate = useNavigate();
 
   const handleAdd = async (e) => {
     e.preventDefault();  
+    setClose(true);
+
+    if (!name || name.length < 2) {
+      return setError('Le prenom n\'est pas valide.')
+    }
+    if (!lastName || lastName.length < 2) {
+      return setError('Le nom n\'est pas valide.')
+    }
+    const regexEmail = RegExp(/^((?!\.)[\w-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/)
+    if (!email || !regexEmail.test(email) ) {
+      return setError('L\'email n\'est pas valide.')
+    }
+
+    if (!message || message.length < 10) {
+      return setError('Le message n\'est pas valide.')
+    }
+
     setSuccess("")
-      await setDoc(doc(db, "messages", `message-${lastName}`), {
+      try { 
+        setError("")
+        await setDoc(doc(db, "messages", `message-${lastName}`), {
         email: email,
         name: name,
         lastName: lastName,
@@ -28,6 +48,11 @@ function FormContact(props) {
       setName("");
       setMessage("");
       setSuccess(true);
+    } catch {}
+  };
+
+  const handleClose = () => {
+    setClose(false);
   };
 
   return (
@@ -40,6 +65,29 @@ function FormContact(props) {
           <span class="font-medium"> Le message a été envoyé.</span>
         </div>
        
+      ) : (
+        ""
+      )}
+      {close && error ? (
+        <div
+          class="w-[30%] bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+          role="alert"
+        >
+          {error && <strong class="font-bold mr-6 ">{error}</strong>}
+
+          <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+            <svg
+              onClick={handleClose}
+              class="fill-current h-6 w-6 text-red-500"
+              role="button"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+            >
+              <title>Close</title>
+              <path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z" />
+            </svg>
+          </span>
+        </div>
       ) : (
         ""
       )}
@@ -155,8 +203,6 @@ function FormContact(props) {
       rounded
       shadow-md
       hover:bg-[#27ae60] hover:shadow-lg
-      focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0
-      active:bg-blue-800 active:shadow-lg
       transition
       duration-150
       ease-in-out"

@@ -1,10 +1,12 @@
 import React from "react";
-import {AiFillEnvironment} from "react-icons/ai"
+import { AiFillEnvironment } from "react-icons/ai";
 
 function SectionAbout() {
   return (
-    <div className="flex flex-col justify-around items-center h-screen">
-      <h3 className="text-center uppercase font-bold text-[#192a56] text-3xl mb-10 skew-x-[-15deg]">Qui sommes-nous ? :</h3>
+    <div className="flex flex-col justify-around items-center h-[150vh]">
+      <h3 className="text-center uppercase font-bold text-[#192a56] text-3xl mb-10 skew-x-[-15deg]">
+        Qui sommes-nous ? :
+      </h3>
       <div id="about" className=" flex">
         <div className="flex justify-center items-center relative w-1/2">
           <img
@@ -39,8 +41,48 @@ function SectionAbout() {
           <p>Allez les petits fillots en route, allons menez la chariotte!</p>
         </div>
       </div>
-      <div id="villes" className="">
-        <AiFillEnvironment />
+
+      <div id="villes" className="flex flex-col justify-center items-center">
+        <h2 className="flex text-3xl font-bold text-[#27ae60] skew-x-[-15deg]">
+          <AiFillEnvironment style={{ marginRight: "5px" }} /> Retrouvez nous ici <AiFillEnvironment style={{ marginLeft: "5px" }} />
+        </h2>
+        <h3>
+          Le midi de <strong>11h45 à 13h45</strong>, le soir de{" "}
+          <strong>18h45 à 21h</strong>{" "}
+        </h3>
+
+        <ul className="flex items-center justify-center ">
+          <li className="mr-[10rem] mb-4 mt-5">
+            <p className="text-center">Lundi Midi</p>
+            <p className="text-center">Leroy Merlin, Verquin - Béthune.</p>
+          </li>
+          <li>
+            <p className="text-center">Mardi Midi</p>
+            <p>Décathlon, Béthune.</p>
+          </li>
+        </ul>
+
+        <ul className="flex items-center justify-center">
+          <li className="mr-[10rem] mb-4">
+            <p className="text-center">Mercredi Soir</p>
+            <p className="text-center">Anzin St Aubin, place Jehan Bodel</p>
+          </li>
+          <li>
+            <p className="text-center">Jeudi Midi</p>
+            <p >Leroy Merlin, Arras.</p>
+          </li>
+        </ul>
+
+        <ul className="flex items-center justify-between mt-3">
+          <li className="mr-[8rem]">
+            <p className="text-center">Jeudi Soir</p>
+            <p className="text-center">Tiloy Les Mofflaines, place Armand Duval.</p>
+          </li>
+          <li>
+            <p className="text-center">Vendredi Soir</p>
+            <p>Locon, place de l'église.</p>
+          </li>
+        </ul>
       </div>
     </div>
   );

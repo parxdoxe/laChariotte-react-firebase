@@ -12,6 +12,12 @@ import Menu from "./pages/user/Menu";
 import Cart from "./pages/user/Cart";
 import Contact from "./pages/user/Contact";
 import ProtectedRUser from "./components/ProtectedRUser";
+import Update from "./components/UserProfile/Update";
+import Checkout from "./components/Cart/Checkout";
+import Stripe from "./components/Cart/Stripe";
+import ResetPassword from "./components/Authentification/ResetPassword";
+import ProtectedRAuth from "./components/ProtectedRAuth";
+import NotFound from "./components/NotFound/NotFound";
 
 
 function App() {
@@ -42,17 +48,24 @@ function App() {
         </Route>
         <Route path="/">
           <Route index element={<Home />} />
-          <Route path="login" element={ <Login /> } />
-          <Route path="signup" element={ <Signup /> } />
-          <Route path="Account" element={<ProtectedRUser><Account /></ProtectedRUser>} />
-          <Route path="/about" element={<About />} />
+          <Route path="login" element={<ProtectedRAuth > <Login /> </ProtectedRAuth>  } />
+          <Route path="mot-de-passe-oublie" element={ <ResetPassword /> } />
+          <Route path="signup" element={<ProtectedRAuth > <Signup /> </ProtectedRAuth> } />
+          <Route path="mon-compte" element={<ProtectedRUser><Account /></ProtectedRUser>} />
+          <Route path="mon-compte/modifier" element={<ProtectedRUser><Update /></ProtectedRUser>} />
+          
+          <Route path="/a-propos" element={<About />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="commande" element={<Cart />} />
+          <Route path="mon-panier" element={<ProtectedRUser><Cart /></ProtectedRUser>} />
+          <Route path="mon-panier/checkout" element={<ProtectedRUser><Stripe /></ProtectedRUser>} />
+
           <Route path="menu/tout" element={<Menu />} />
           <Route path="menu/type-burgers" element={<Menu type={'burgers'} />} />
           <Route path="menu/type-plats" element={<Menu type={'plats'} />} />
           <Route path="menu/type-boissons" element={<Menu type={'boissons'} />} />
           <Route path="menu/type-sauces" element={<Menu type={'sauces'} />} />
+
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </>

@@ -1,6 +1,4 @@
 import React from "react";
-import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
-
 import { collection, getDocs } from "firebase/firestore";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -12,7 +10,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
-import { MdOutlineRecommend } from 'react-icons/md'
+
 
 function SliderMulti(props) {
   const [menus, setMenus] = useState([]);
@@ -82,7 +80,7 @@ function SliderMulti(props) {
     <Swiper
       modules={[Navigation, Pagination, Scrollbar, A11y, EffectFade]}
       spaceBetween={20}
-      slidesPerView={2}
+      slidesPerView={5}
       navigation
       pagination={{ clickable: true }}
       scrollbar={{ draggable: true }}
