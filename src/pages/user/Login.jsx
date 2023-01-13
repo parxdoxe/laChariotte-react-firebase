@@ -9,7 +9,6 @@ function Login() {
   
   return (
     <div className="h-screen">
-      <Header></Header>
       <FormLogin />
     </div>
   );

@@ -73,7 +73,7 @@ function Update(props) {
 
   return (
     <div>
-      <Header />
+      
       <div className="flex">
       <SideBar />
       {loggeduser ? (

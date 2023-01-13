@@ -5,6 +5,8 @@ import {
   doc,
   updateDoc,
   increment,
+  query,
+  onSnapshot
 } from "firebase/firestore";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -12,29 +14,11 @@ import { auth, db } from "../../firebase-config";
 import { useUserAuth } from "../../context/UserAuthContext";
 import Header from "../../components/Header/Header";
 import ProductTab from "./ProductTab";
+import { Link } from "react-router-dom";
 
-function SectionCart(props) {
+function SectionCart({products}) {
   const standard = 0;
 
-  const [products, setProducts] = useState([]);
-
-useEffect(() => {
-  auth.onAuthStateChanged((userlogged) => {
-    if (userlogged) {
-      const getCart = async () => {
-        let list = [];
-        const querySnapshot = await getDocs(
-          collection(db, `cart-${userlogged.uid}`)
-        );
-        querySnapshot.forEach((doc) => {
-          list.push({ ...doc.data() });
-        });
-        setProducts(list);
-      };
-      getCart();
-    }
-  });
-}, [])
 
   function total() {
     let x = 0;
@@ -48,9 +32,7 @@ useEffect(() => {
 
   return (
     <>
-      <div>
-        <Header quantity={products.length} />
-      </div>
+     
 
       <div className="container mx-auto mt-10 h-[80vh]">
         <div className="flex shadow-md my-10">
@@ -82,8 +64,8 @@ useEffect(() => {
               />
             ))}
 
-            <a
-              href="/menu/tout"
+            <Link
+              to="/menu/tout"
               className="flex font-semibold text-[#27ae60] text-sm mt-10 hover:opacity-80"
             >
               <svg
@@ -93,7 +75,7 @@ useEffect(() => {
                 <path d="M134.059 296H436c6.627 0 12-5.373 12-12v-56c0-6.627-5.373-12-12-12H134.059v-46.059c0-21.382-25.851-32.09-40.971-16.971L7.029 239.029c-9.373 9.373-9.373 24.569 0 33.941l86.059 86.059c15.119 15.119 40.971 4.411 40.971-16.971V296z" />
               </svg>
               Continuer votre menu
-            </a>
+            </Link>
           </div>
 
           <div id="summary" className="w-1/4 px-8 py-10">

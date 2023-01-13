@@ -1,14 +1,17 @@
 import React from "react";
-import {  deleteDoc, doc, updateDoc, increment } from "firebase/firestore";
+import {  deleteDoc, doc, updateDoc, increment, onSnapshot, query, collection } from "firebase/firestore";
 import { db} from "../../firebase-config";
 import { useUserAuth } from "../../context/UserAuthContext";
 import { useState } from "react"
+import { useEffect } from "react";
+import {auth} from "../../context/UserAuthContext"
+
 
 
 function ProductTab({product}) {
-    const { admin } = useUserAuth();
+    const { admin, deleteProduct, cart} = useUserAuth();
     const [prodQuantity, setProdQuantity] = useState(product.quantity)
-    const [event, setEvent] = useState(true)
+
 
   
   const decrementProduct =  (index, quantity) =>  {
@@ -28,6 +31,8 @@ function ProductTab({product}) {
   const incrementProduct = (index) => {
 
     const test = doc(db, `cart-${admin.uid}`, `article-${index}`);
+
+
     setProdQuantity(prodQuantity + 1)
         const updateIncrement = async () => {
           await updateDoc(test, {
@@ -38,24 +43,18 @@ function ProductTab({product}) {
 
   };
 
-  const deleteProduct = (index) => {
-    
-      setEvent(!event);
-    
-      const remove = async () => {
-        await deleteDoc(doc(db, `cart-${admin.uid}`, `article-${index}`));
-      } 
-      remove() 
-      setTimeout(() => {
-            window.location.reload()
-      }, 400);
-  }
+  console.log(cart.length);
+
+  
+
+
 
 
     return (
-        <div className={ event ? "flex items-center hover:bg-gray-100 -mx-8 px-6 py-5" : "hidden"}>
+      <> 
+          { cart.length === 0 ? <p>Panier vide</p> :
+        <div className={"flex items-center hover:bg-gray-100 -mx-8 px-6 py-5"}>
         
-          
         
           <div className="flex w-2/5"> 
           
@@ -86,6 +85,8 @@ function ProductTab({product}) {
           <span className="text-center w-1/5 font-semibold text-sm">{ product.price * product.quantity }€</span>
          
         </div>
+}
+        </>
     );
 }
 

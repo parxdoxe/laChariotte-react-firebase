@@ -7,9 +7,10 @@ import { GiFoodTruck } from "react-icons/gi";
 import { useState, useEffect } from "react";
 import { auth, db } from "../../firebase-config";
 import { collection, getDocs } from "firebase/firestore";
+import IconCart from "../Cart/IconCart";
 
-function Header({quantity}) {
-  const { admin, logout } = useUserAuth();
+function Header() {
+  const { admin, logout, cart} = useUserAuth();
   const navigate = useNavigate();
 
   const handleLogout = async () => {
@@ -20,6 +21,7 @@ function Header({quantity}) {
       console.log(e.message);
     }
   };
+
 
   const [products, setProducts] = useState([]);
   useEffect(() => {
@@ -39,12 +41,10 @@ function Header({quantity}) {
       }
     });
   }, []);
-
-    console.log(products);
+ 
  
 
-  const test2 =
-    "absolute top-[-10px] text-green-600 z-1 right-[-10px] font-bold";
+
 
   return (
     <header className="flex justify-around items-center h-[80px] text-[#192a56]">
@@ -80,10 +80,7 @@ function Header({quantity}) {
           </li>
           <li className="mr-4 text-[#192a56] duration-75 hover:text-[#27ae60] relative">
             <NavLink to="/mon-panier">
-              <FaShoppingCart fontSize="1.5rem" />
-              <span className={products.length === 0 ? "" : test2}>
-                {products.length === 0 ? "" : products.length}
-              </span>
+            <IconCart cart={cart} />
             </NavLink>
           </li>
           <li>

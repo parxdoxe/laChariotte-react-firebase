@@ -6,7 +6,7 @@ import FooterMenu from "../../components/Footer/FooterMenu";
 function Menu(props) {
   return (
     <>
-      <Header />
+     
       <Results type={props.type} />
       <FooterMenu />
     </>

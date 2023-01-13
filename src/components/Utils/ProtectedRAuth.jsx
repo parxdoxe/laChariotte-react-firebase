@@ -1,14 +1,14 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-import { useUserAuth } from "../context/UserAuthContext";
+import { useUserAuth } from "../../context/UserAuthContext";
 import { collection, getDocs, query, where } from "firebase/firestore";
-import { auth, db } from "../firebase-config";
+import { auth, db } from "../../firebase-config";
 import { useEffect } from "react";
 import { useState } from "react";
 
 
 function ProtectedRAuth({children}) {
-    const { admin } = useUserAuth();
+   
 
     function GetUser() {
         const [user, setUser] = useState("");

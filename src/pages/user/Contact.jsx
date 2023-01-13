@@ -6,7 +6,6 @@ import Header from '../../components/Header/Header';
 function Contact(props) {
     return (
         <>
-        <Header />
         <SectionContact />
         <FooterMenu />
         </>

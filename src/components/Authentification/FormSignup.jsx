@@ -20,6 +20,9 @@ function FormSignup(props) {
   const { signup } = useUserAuth();
   const navigate = useNavigate();
 
+  const date = new Date()
+
+
   const commune = [
     "Marconne",
     "Verquin",
@@ -87,6 +90,7 @@ function FormSignup(props) {
         codePostal: postal,
         numeroTel: tel,
         role: role,
+        createdAt: date,
         uid: res.user.uid,
       });
       navigate("/");

@@ -10,7 +10,7 @@ function Account() {
 
   return (
     <div>
-      <Header></Header>
+     
       <Profile />
     </div>
   );

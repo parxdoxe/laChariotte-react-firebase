@@ -6,7 +6,7 @@ import FooterMenu from '../../components/Footer/FooterMenu';
 function About(props) {
     return (
         <>
-        <Header />
+        
         <SectionAbout />
         <FooterMenu />
         </>

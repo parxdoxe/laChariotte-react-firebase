@@ -22,6 +22,7 @@ function Home() {
         <div>
             <button onClick={handleLogout}>Déconnexion</button>
             <NavLink to="/admin/list-users">Utilisateurs</NavLink>
+            
         </div>
     );
 }
